@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EMI calculator</title>
+        <style>
+            .result label{float: left; font-weight: bold;}
+        </style>
+    </head>
+
+    <body>
+        <from name="myForm" action="" method="post">
+            <label>Total Amount</label>
+            <input type="text" name="loanAmnt" id="loanAmnt">
+            <br/><br/>
+            <label>Interest Rate</label>
+            <input type="text" name="intRate" id="intRate">
+            <br/><br/>
+            <label>How many year</label>
+            <input type="text" name="intRate" id="hwMNYyrs">
+            <br/><br/>
+            <button type="submit" id="btnSBMT" calculate()>Calculate</button>
+        </from>
+
+        <div class="result">
+            <p><label>Monthly EMI:</label> <span id="mnthEMI"></span></p><br/>
+            <p><label>Total Int Payable:</label> <span id="toINTpay"></span></p><br/>
+            <p><label>Total paypement(Principle+Interest):</label> <span id="toAMNTpay"></span></p>
+        </div>
+
+        <br/>
+        <div id="getAMNT"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $('#btnSBMT').click(function(){
+                if($('#loanAmnt').val() ==""){
+                //alert("Mandetory Feild");
+                $("#getAMNT").text("Please fill the field correctly");
+            }
+            else{
+                document.getElementById("getAMNT").innerHTML="Loan Amount:"+$('#loanAmnt').val();
+            }
+            });
+
+            function calculate(){
+                //declaration of input-boxes VALUE as variable
+                var amount = document.getElementById("loanAmnt");
+                var intRate = document.getElementById("intRate");
+                var years = document.getElementById("hwMNYyrs");
+
+                var mnthEMI = document.getElementById("mnthEMI");
+                var toINTpay = document.getElementById("toINTpay");
+                var toALLpay = document.getElementById("toAMNTpay");
+
+                //declared of variable of principle/interst/years with calculation method
+                var priciple = parsefloat(loanAmnt.value);
+                var interest = parseFloat(intRate.value) / 100 / 12;
+                var payments = parseFloat(hwMNYyrs.value) * 12;
+                
+                // compute the monthly payment figure
+                var x = Math.pow(1 + interest, payments); //Math.pow computes powers
+                var monthly = (principal*x*interest)/(x-1);
+            };
+        </script>
+    </body>
+</html>
+
+    
